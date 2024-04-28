@@ -1,0 +1,63 @@
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App1.MainPage">
+
+    <StackLayout>
+        <Label Text="Escala de Glasgow" FontSize="Large" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+
+        <StackLayout>
+            <Button x:Name="btnNome" Text="Adicionar Nome do Enfermeiro" Clicked="BtnNome_Clicked"/>
+            <Button x:Name="btnData" Text="Adicionar Data do Exame" Clicked="BtnData_Clicked"/>
+            <Button x:Name="btnNomePaciente" Text="Adicionar Nome do Paciente" Clicked="BtnNomePaciente_Clicked"/>
+            <Button x:Name="btnNumProntuario" Text="Adicionar Número do Prontuario" Clicked="BtnNumProcesso_Clicked"/>
+        </StackLayout>
+
+
+
+        <Label Text="Abertura Ocular:"/>
+        <Picker x:Name="pickerAberturaOcular" SelectedIndexChanged="PickerAberturaOcular_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>4 - Espontânea</x:String>
+                    <x:String>3 - À voz</x:String>
+                    <x:String>2 - À dor</x:String>
+                    <x:String>1 - Nenhuma</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Label Text="Resposta Verbal:"/>
+        <Picker x:Name="pickerRespostaVerbal" SelectedIndexChanged="PickerRespostaVerbal_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>5 - Orientado</x:String>
+                    <x:String>4 - Confuso</x:String>
+                    <x:String>3 - Palavras</x:String>
+                    <x:String>2 - Sons</x:String>
+                    <x:String>1 - Nenhuma</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Label Text="Resposta Motora:"/>
+        <Picker x:Name="pickerRespostaMotora" SelectedIndexChanged="PickerRespostaMotora_SelectedIndexChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>6 - Obedece</x:String>
+                    <x:String>5 - Localiza</x:String>
+                    <x:String>4 - Flete</x:String>
+                    <x:String>3 - Flexão Anormal</x:String>
+                    <x:String>2 - Extensão</x:String>
+                    <x:String>1 - Nenhuma</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Calcular Pontuação" Clicked="CalcularPontuacao_Clicked"/>
+        <Label x:Name="lblPontuacao" HorizontalOptions="Center"/>
+
+        <Button Text="Gerar PDF" Clicked="GerarPDF_Clicked"/>
+    </StackLayout>
+
+</ContentPage>
