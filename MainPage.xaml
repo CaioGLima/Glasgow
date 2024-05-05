@@ -57,8 +57,9 @@
         <Button Text="Calcular Pontuação" Clicked="CalcularPontuacao_Clicked"/>
         <Label x:Name="lblPontuacao" HorizontalOptions="Center"/>
 
-        x:Name="stackGerarPDF" IsVisible="False">
-    <Button Text="Gerar PDF" Clicked="GerarPDF_Clicked"/>
+        <StackLayout x:Name="stackGerarPDF" IsVisible="False">
+            <Button Text="Gerar PDF" Clicked="GerarPDF_Clicked"/>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
