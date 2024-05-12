@@ -30,22 +30,25 @@ public partial class MainPage : ContentPage
     private void BtnInfo_Clicked(object sender, EventArgs e)
     {
         // Verifica qual botão foi clicado e atualiza a variável correspondente
-        if (sender == btnNome)
+        if(sender is Button clickedButton)
         {
-            nomeEnfermeiro = txtNomeEnfermeiro.Text;
-        }
-        else if (sender == btnData)
-        {
-            dataExame = txtDataExame.Text;
-        }
-        else if (sender == btnNomePaciente)
-        {
-            nomePaciente = txtNomePaciente.Text;
-        }
-        else if (sender == btnNumProntuario)
-        {
-            numProntuario = txtNumProntuario.Text;
-        }
+            if (clickedButton == btnNome)
+            {
+                nomeEnfermeiro = txtNomeEnfermeiro.Text;
+            }
+            else if (clickeButton == btnData)
+            {
+                dataExame = txtDataExame.Text;
+            }
+            else if (clickedButton == btnNomePaciente)
+            {
+                nomePaciente = txtNomePaciente.Text;
+            }
+            else if (clickedButton == btnNumProntuario)
+            {
+                numProntuario = txtNumProntuario.Text;
+            }
+          }  
     }
 
     private void PickerAberturaOcular_SelectedIndexChanged(object sender, EventArgs e)
