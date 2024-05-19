@@ -1,0 +1,52 @@
+Parte no .xaml
+<StackLayout>
+    <Entry x:Name="txtNomeEnfermeiro" Placeholder="Nome do Enfermeiro"/>
+    <Button x:Name="btnNome" Text="Adicionar Nome do Enfermeiro" Clicked="BtnInfo_Clicked"/>
+
+    <Entry x:Name="txtDataExame" Placeholder="Data do Exame"/>
+    <Button x:Name="btnData" Text="Adicionar Data do Exame" Clicked="BtnInfo_Clicked"/>
+
+    <Entry x:Name="txtNomePaciente" Placeholder="Nome do Paciente"/>
+    <Button x:Name="btnNomePaciente" Text="Adicionar Nome do Paciente" Clicked="BtnInfo_Clicked"/>
+
+    <Entry x:Name="txtNumProntuario" Placeholder="Número do Prontuário"/>
+    <Button x:Name="btnNumProntuario" Text="Adicionar Número do Prontuário" Clicked="BtnInfo_Clicked"/>
+</StackLayout>
+
+Parte no .cs
+public partial class MainPage : ContentPage
+{
+    private string nomeEnfermeiro;
+    private string dataExame;
+    private string nomePaciente;
+    private string numProntuario;
+
+    public MainPage()
+    {
+        InitializeComponent();
+    }
+
+    private void BtnInfo_Clicked(object sender, EventArgs e)
+    {
+        if (sender is Button clickedButton)
+        {
+            switch (clickedButton.Text)
+            {
+                case "Adicionar Nome do Enfermeiro":
+                    nomeEnfermeiro = txtNomeEnfermeiro.Text;
+                    break;
+                case "Adicionar Data do Exame":
+                    dataExame = txtDataExame.Text;
+                    break;
+                case "Adicionar Nome do Paciente":
+                    nomePaciente = txtNomePaciente.Text;
+                    break;
+                case "Adicionar Número do Prontuário":
+                    numProntuario = txtNumProntuario.Text;
+                    break;
+            }
+
+            DisplayAlert("Informação Adicionada", "A informação foi adicionada com sucesso.", "OK");
+        }
+    }
+}
