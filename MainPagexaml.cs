@@ -52,38 +52,85 @@ public partial class MainPage : ContentPage
     }
 
     private void PickerAberturaOcular_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string opcaoSelecionada = pickerAberturaOcular.SelectedItem.ToString();
-        int pontuacaoAberturaOcular = escalaGlasgow.ObterPontuacaoAberturaOcular(opcaoSelecionada);
-        CalcularPontuacao(pontuacaoAberturaOcular);
-    }
+        {
+            VerificarSelecoes();
+        }
 
-    private void PickerRespostaMotora_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string opcaoSelecionada = pickerRespostaMotora.SelectedItem.ToString();
-        int pontuacaoRespostaMotora = escalaGlasgow.ObterPontuacaoRespostaMotora(opcaoSelecionada);
-        CalcularPontuacao(pontuacaoRespostaMotora);
-    }
+        private void PickerRespostaMotora_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VerificarSelecoes();
+        }
 
-    private void PickerRespostaVerbal_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        string opcaoSelecionada = pickerRespostaVerbal.SelectedItem.ToString();
-        int pontuacaoRespostaVerbal = escalaGlasgow.ObterPontuacaoRespostaVerbal(opcaoSelecionada);
-        CalcularPontuacao(pontuacaoRespostaVerbal);
-    }
+        private void PickerRespostaVerbal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VerificarSelecoes();
+        }
 
-    private void CalcularPontuacao(int pontuacaoParte)
-    {
-        int pontuacaoAberturaOcular = escalaGlasgow.ObterPontuacaoAberturaOcular(pickerAberturaOcular.SelectedItem.ToString());
-        int pontuacaoRespostaVerbal = escalaGlasgow.ObterPontuacaoRespostaVerbal(pickerRespostaVerbal.SelectedItem.ToString());
-        int pontuacaoRespostaMotora = escalaGlasgow.ObterPontuacaoRespostaMotora(pickerRespostaMotora.SelectedItem.ToString());
+        private void VerificarSelecoes()
+        {
+            if (pickerAberturaOcular.SelectedItem != null && pickerRespostaVerbal.SelectedItem != null && pickerRespostaMotora.SelectedItem != null)
+            {
+                CalcularPontuacao();
+            }
+        }
 
-        int pontuacaoTotal = escalaGlasgow.CalcularPontuacao(pontuacaoAberturaOcular, pontuacaoRespostaVerbal, pontuacaoRespostaMotora);
-        lblPontuacao.Text = $"Pontuação total: {pontuacaoTotal}";
-        
-    // Mostrar o pop-up para gerar o PDF
-        MostrarPopUpGerarPDF();
-    }
+        private void CalcularPontuacao()
+        {
+            try
+            {
+                string opcaoAberturaOcular = pickerAberturaOcular.SelectedItem?.ToString();
+                string opcaoRespostaVerbal = pickerRespostaVerbal.SelectedItem?.ToString();
+                string opcaoRespostaMotora = pickerRespostaMotora.SelectedItem?.ToString();
+
+                Console.WriteLine($"Abertura Ocular: {opcaoAberturaOcular}, Resposta Verbal: {opcaoRespostaVerbal}, Resposta Motora: {opcaoRespostaMotora}");
+
+                if (string.IsNullOrWhiteSpace(opcaoAberturaOcular) || string.IsNullOrWhiteSpace(opcaoRespostaVerbal) || string.IsNullOrWhiteSpace(opcaoRespostaMotora))
+                {
+                    DisplayAlert("Erro", "Por favor, selecione todas as opções.", "OK");
+                    return;
+                }
+
+                int pontuacaoAberturaOcular = escalaGlasgow.ObterPontuacaoAberturaOcular(opcaoAberturaOcular);
+                int pontuacaoRespostaVerbal = escalaGlasgow.ObterPontuacaoRespostaVerbal(opcaoRespostaVerbal);
+                int pontuacaoRespostaMotora = escalaGlasgow.ObterPontuacaoRespostaMotora(opcaoRespostaMotora);
+
+                int pontuacaoTotal = escalaGlasgow.CalcularPontuacao(pontuacaoAberturaOcular, pontuacaoRespostaVerbal, pontuacaoRespostaMotora);
+                lblPontuacao.Text = $"Pontuação total: {pontuacaoTotal}";
+            }
+            catch (Exception ex)
+            {
+                DisplayAlert("Erro", $"Ocorreu um erro ao calcular a pontuação: {ex.Message}", "OK");
+                Console.WriteLine(ex);
+            }
+        }
+
+        private async void OnCalculateButtonClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                string opcaoAberturaOcular = pickerAberturaOcular.SelectedItem?.ToString();
+                string opcaoRespostaVerbal = pickerRespostaVerbal.SelectedItem?.ToString();
+                string opcaoRespostaMotora = pickerRespostaMotora.SelectedItem?.ToString();
+
+                if (string.IsNullOrWhiteSpace(opcaoAberturaOcular) || string.IsNullOrWhiteSpace(opcaoRespostaVerbal) || string.IsNullOrWhiteSpace(opcaoRespostaMotora))
+                {
+                    await DisplayAlert("Erro", "Por favor, selecione todas as opções.", "OK");
+                    return;
+                }
+
+                int pontuacaoAberturaOcular = escalaGlasgow.ObterPontuacaoAberturaOcular(opcaoAberturaOcular);
+                int pontuacaoRespostaVerbal = escalaGlasgow.ObterPontuacaoRespostaVerbal(opcaoRespostaVerbal);
+                int pontuacaoRespostaMotora = escalaGlasgow.ObterPontuacaoRespostaMotora(opcaoRespostaMotora);
+
+                int pontuacaoTotal = escalaGlasgow.CalcularPontuacao(pontuacaoAberturaOcular, pontuacaoRespostaVerbal, pontuacaoRespostaMotora);
+                await DisplayAlert("Pontuação Calculada", $"Sua pontuação total é {pontuacaoTotal}", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Erro", $"Ocorreu um erro ao calcular a pontuação: {ex.Message}", "OK");
+                Console.WriteLine(ex);
+            }
+        }
     
 private async void GerarPDF_Clicked(object sender, EventArgs e)
     {
@@ -126,3 +173,9 @@ private async void GerarPDF_Clicked(object sender, EventArgs e)
     }
 }
 }
+
+
+
+
+
+
