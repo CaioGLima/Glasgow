@@ -1,20 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="App1.MainPage">
+             x:Class="GlasGow.MainPage">
 
     <StackLayout>
         <Label Text="Escala de Glasgow" FontSize="Large" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
 
         <StackLayout>
-            <Button x:Name="btnNome" Text="Adicionar Nome do Enfermeiro" Clicked="BtnNome_Clicked"/>
-            <Button x:Name="btnData" Text="Adicionar Data do Exame" Clicked="BtnData_Clicked"/>
-            <Button x:Name="btnNomePaciente" Text="Adicionar Nome do Paciente" Clicked="BtnNomePaciente_Clicked"/>
-            <Button x:Name="btnNumProntuario" Text="Adicionar Número do Prontuario" Clicked="BtnNumProcesso_Clicked"/>
-        </StackLayout>
+            <Entry x:Name="txtNomeEnfermeiro" Placeholder="Nome do Enfermeiro"/>
+            <Button x:Name="btnNome" Text="Adicionar Nome do Enfermeiro" Clicked="BtnInfo_Clicked"/>
 
+            <Entry x:Name="txtDataExame" Placeholder="Data do Exame"/>
+            <Button x:Name="btnData" Text="Adicionar Data do Exame" Clicked="BtnInfo_Clicked"/>
+
+            <Entry x:Name="txtNomePaciente" Placeholder="Nome do Paciente"/>
+            <Button x:Name="btnNomePaciente" Text="Adicionar Nome do Paciente" Clicked="BtnInfo_Clicked"/>
+
+            <Entry x:Name="txtNumProntuario" Placeholder="Número do Prontuário"/>
+            <Button x:Name="btnNumProntuario" Text="Adicionar Número do Prontuário" Clicked="BtnInfo_Clicked"/>
+        </StackLayout>
 
 
         <Label Text="Abertura Ocular:"/>
@@ -53,13 +60,12 @@
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>
+        
+        <Button Text="Calcular Pontuação" Clicked="OnCalculateButtonClicked" />
+        <Label x:Name="lblPontuacao" Text="Pontuação total: " FontSize="Large" />
 
-        <Button Text="Calcular Pontuação" Clicked="CalcularPontuacao_Clicked"/>
-        <Label x:Name="lblPontuacao" HorizontalOptions="Center"/>
-
-        <StackLayout x:Name="stackGerarPDF" IsVisible="False">
-            <Button Text="Gerar PDF" Clicked="GerarPDF_Clicked"/>
-        </StackLayout>
+        <Button Text="Gerar PDF" />
     </StackLayout>
 
 </ContentPage>
+
